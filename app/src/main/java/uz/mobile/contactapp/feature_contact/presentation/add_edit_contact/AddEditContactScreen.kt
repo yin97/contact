@@ -156,21 +156,24 @@ fun AddEditContactScreen(
                 },
                 isHintVisible = nameState.isHintVisible,
                 singleLine = true,
-                textStyle = MaterialTheme.typography.headlineMedium
+                textStyle = MaterialTheme.typography.headlineMedium,
+                isNumberKeyboard = false
             )
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
                 text = phoneNumberState.text,
                 hint = phoneNumberState.hint,
                 onValueChange = {
-                    viewModel.onEvent(AddEditContactEvent.EnteredPhoneNumber(it))
+                    if (it.length <= 13)
+                        viewModel.onEvent(AddEditContactEvent.EnteredPhoneNumber(it))
                 },
                 onFocusChange = {
                     viewModel.onEvent(AddEditContactEvent.ChangePhoneNumberFocus(it))
                 },
                 isHintVisible = phoneNumberState.isHintVisible,
                 singleLine = true,
-                textStyle = MaterialTheme.typography.bodyLarge
+                textStyle = MaterialTheme.typography.bodyLarge,
+                isNumberKeyboard = true
             )
         }
     }
